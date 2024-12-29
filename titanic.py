@@ -11,7 +11,7 @@ inputs=pd.concat([inputs,dummies],axis='columns')
 inputs.drop(['Sex'], axis='columns',inplace=True )
 inputs.Age=inputs.Age.fillna(inputs.Age.mean())
 
-print(inputs.head())
+#print(inputs.head())
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test=train_test_split(inputs,target,test_size=0.2)
