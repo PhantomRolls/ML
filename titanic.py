@@ -1,5 +1,5 @@
 import pandas as pd
-df=pd.read_csv("Titanic-Dataset.csv")
+df=pd.read_csv("csv/Titanic-Dataset.csv")
 df.drop(['PassengerId','Name','SibSp','Ticket','Cabin','Embarked','Parch'], axis='columns',inplace=True )
 target=df.Survived
 inputs=df.drop(['Survived'], axis='columns')

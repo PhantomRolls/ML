@@ -3,13 +3,13 @@ import numpy as np
 import pandas as pd
 from matplotlib.animation import FuncAnimation
 
-df=pd.read_csv("poids-taille.csv")
+df=pd.read_csv("csv/poids-taille.csv")
 df=df.drop(['Genre'], axis='columns')
 df['Taille']=df['Taille']*2.54
 df['Poids']=df['Poids']*0.453592
+coefficients = {'a': 0, 'b': 0}
 
-
-p=1000
+p=100
 Poids = df['Poids']
 Taille = df['Taille']
 xi=Taille.to_numpy()[:p]
@@ -73,11 +73,21 @@ def gradient_descent_anim(x, y):
         cost=L(a,b)
         line.set_data(xi, y_line)
         ax.set_title(f"y = {af:.2f}x + {bf:.2f}, cost={cost:.2f}")
+        coefficients['a']=float(round(af,2))
+        coefficients['b']=float(round(bf,2))
         return line,
     
     ani = FuncAnimation(fig, update, frames=it, interval=10, blit=False)
     plt.show()
-    
+
 gradient_descent_anim(x,y)
+
+
+import pickle
+
+with open('csv/gradient_coefficients.pkl', 'wb') as f:
+    pickle.dump(coefficients, f)
+
+
 
 
